@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <h1>退出</h1>
+    <form id="form" method="post" action="https://script.google.com/macros/s/AKfycbxHhIYaBk1ELGXyk-nis877rhLW8f-3d1bTzXhYk1A_VWORCT9cPBIXsT06TCWksmyo3A/exec">
+      <label>番号：<input type="number" name="id" min="0"></input></label>
+      <input type="submit" value="送信">
+    </form>
+    <p>受付番号:</p>
+    <p id="num"></p>
+    <div id="res">
+
+    </div>
+  </body>
+<script>
+  // フォーム要素を取得
+  const form = document.getElementById('form');
+  const responseDiv = document.getElementById('res');
+
+  // submit イベントを監視
+  form.addEventListener('submit', function(event) {
+    // デフォルトのフォーム送信をキャンセル（ページ遷移させない）
+    event.preventDefault();
+
+    // FormData オブジェクトを作成し，フォームの入力値を取得
+    const formData = new FormData(form);
+
+    // ⑥ fetch でサーバーにデータを送信
+    fetch(form.action, {
+      method: "POST",        // "POST"
+      headers:{
+        'Content-Type': 'text/plain',
+      },
+      body: formData,             // 入力されたデータをリクエストボディにセット
+    })
+      .then(function(res) {
+        // レスポンスをテキストとして取得
+        return res.text();
+      })
+      .then(function(text) {
+        // ⑦ サーバーから返ってきた文字データを画面に表示
+        responseDiv.textContent = text;
+      })
+      .catch(function(err) {
+        // エラー発生時の処理
+        responseDiv.textContent = 'エラーが発生しました：' + err;
+      });
+  });
+</script>
+
+  </script>
+</html>
