@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+  </head>
+  <body>
+    <h1>Hello World !!</h1>
+    <button onclick="entry()">入場</button>
+    <p>受付番号:</p>
+    <p id="num"></p>
+  </body>
+  <script>
+    function entry(){
+    fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLi3MdjGQhfEvixtaRg4l-cYVh9iqZ3ImFH41qs4yV6m5DjouQMEjgehH0pp4fMehasLyt_ONJVSc9V3PL2D5eFDLktDSTsrhCLRht_OVU-ii5jm8QIBcOqirixn5nkYs1EjRDoe0jQLUx2UERsQyfLwrn1EytZJ86i-EtCD0jDirqpry6V473_SbbFBNujyflrJHTvZUZXv0vE1bggxNNApTqEZvvYkpaYKxDbMehflO5kNmucrP7fanHJwdmlNpq5TjbBdAyMMBYdkMDhaA8ghZXzVGg&lib=M1tHrx_0dLQ1d_CNJuccL-PzsvGFGyFdS")
+    .then(response => response.text())
+    .then(text => {
+      console.log("返ってきた num は：", text);
+      number = document.getElementById("num")
+      number.textContent = text;
+    })
+    .catch(err => {
+      console.error("GAS 呼び出しに失敗しました", err);
+    });
+    }
+
+</script>
+</html>
