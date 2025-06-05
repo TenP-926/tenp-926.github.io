@@ -2,6 +2,8 @@
 <html>
   <head>
     <base target="_top">
+    <meta charset="UTF-8" />
+    <title>入場</title>
     <style type="text/css">
   body, html{
       margin: 0;
@@ -55,7 +57,7 @@
     fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLi3MdjGQhfEvixtaRg4l-cYVh9iqZ3ImFH41qs4yV6m5DjouQMEjgehH0pp4fMehasLyt_ONJVSc9V3PL2D5eFDLktDSTsrhCLRht_OVU-ii5jm8QIBcOqirixn5nkYs1EjRDoe0jQLUx2UERsQyfLwrn1EytZJ86i-EtCD0jDirqpry6V473_SbbFBNujyflrJHTvZUZXv0vE1bggxNNApTqEZvvYkpaYKxDbMehflO5kNmucrP7fanHJwdmlNpq5TjbBdAyMMBYdkMDhaA8ghZXzVGg&lib=M1tHrx_0dLQ1d_CNJuccL-PzsvGFGyFdS")
     .then(response => response.text())
     .then(text => {
-      console.log("返ってきた num は：", text);
+      //console.log("返ってきた num は：", text);
       number.textContent = "受付番号："+text+" 番";
       suc.textContent = "受付完了しました";
       wait.textContent = "次の入場は，画面が切り替わるまでお待ちください"
