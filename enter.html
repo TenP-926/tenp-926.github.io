@@ -2,21 +2,66 @@
 <html>
   <head>
     <base target="_top">
+    <style type="text/css">
+  body, html{
+      margin: 0;
+      padding: 0;
+      font-family: "BIZ UDPGothic", sans-serif;
+      font-weight: 400;
+      display: block;
+      margin: 0% 10% 3% 10%
+  }
+  #btn{
+    border: none;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+    padding: 15px;
+    font-size: 45px;
+    font-weight: 600;
+    background-color: #83c3f7;
+    border-radius: 7.5px;
+    transition: 0.2s linear;
+    margin-bottom: 20px;
+  }
+  #btn:hover {
+    background-color: #4b9fea;
+}
+  p,span{
+    font-size: 20px;
+  }
+  #num{
+    font-size: 70px;
+    font-weight: 600;
+  }
+    </style>
   </head>
   <body>
-    <h1>Hello World !!</h1>
-    <button onclick="entry()">入場</button>
-    <p>受付番号:</p>
+    <h1>入場処理</h1>
+    <p>入場には以下のボタンを押してください。</p>
+    <button onclick="entry()" id="btn">入場する</button>
     <p id="num"></p>
+    <p id="success"></p>
+    <p id="wait"></p>
   </body>
   <script>
     function entry(){
+    number = document.getElementById("num")
+    suc = document.getElementById("success")
+    btn = document.getElementById("btn")
+    wait = document.getElementById("wait")
+    btn.style.display = "none";
+    num.textContent = "しばらくお待ちください...";
     fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLi3MdjGQhfEvixtaRg4l-cYVh9iqZ3ImFH41qs4yV6m5DjouQMEjgehH0pp4fMehasLyt_ONJVSc9V3PL2D5eFDLktDSTsrhCLRht_OVU-ii5jm8QIBcOqirixn5nkYs1EjRDoe0jQLUx2UERsQyfLwrn1EytZJ86i-EtCD0jDirqpry6V473_SbbFBNujyflrJHTvZUZXv0vE1bggxNNApTqEZvvYkpaYKxDbMehflO5kNmucrP7fanHJwdmlNpq5TjbBdAyMMBYdkMDhaA8ghZXzVGg&lib=M1tHrx_0dLQ1d_CNJuccL-PzsvGFGyFdS")
     .then(response => response.text())
     .then(text => {
       console.log("返ってきた num は：", text);
-      number = document.getElementById("num")
-      number.textContent = text;
+      number.textContent = "受付番号："+text+" 番";
+      suc.textContent = "受付完了しました";
+      wait.textContent = "次の入場は，画面が切り替わるまでお待ちください"
+      setTimeout(() => {
+      location.reload();
+    }, 6000);
     })
     .catch(err => {
       console.error("GAS 呼び出しに失敗しました", err);
