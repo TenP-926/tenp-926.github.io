@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <meta charset="UTF-8" />
+    <title>入場</title>
+    <style type="text/css">
+  body, html{
+      margin: 0;
+      padding: 0;
+      font-family: "BIZ UDPGothic", sans-serif;
+      font-weight: 400;
+      display: block;
+      margin: 0% 10% 3% 10%
+  }
+  #btn{
+    border: none;
+    outline: none;
+    appearance: none;
+    cursor: pointer;
+    padding: 15px;
+    font-size: 45px;
+    font-weight: 600;
+    background-color: #83c3f7;
+    border-radius: 7.5px;
+    transition: 0.2s linear;
+    margin-bottom: 20px;
+  }
+  #btn:hover {
+    background-color: #4b9fea;
+}
+  p,span{
+    font-size: 20px;
+  }
+  #num{
+    font-size: 70px;
+    font-weight: 600;
+  }
+    </style>
+  </head>
+  <body>
+    <h1>入場処理 2日目</h1>
+    <p>入場には以下のボタンを押してください。</p>
+    <button onclick="entry()" id="btn">入場する</button>
+    <p id="num"></p>
+    <p id="success"></p>
+    <p id="wait"></p>
+  </body>
+  <script>
+    function entry(){
+    number = document.getElementById("num")
+    suc = document.getElementById("success")
+    btn = document.getElementById("btn")
+    wait = document.getElementById("wait")
+    btn.style.display = "none";
+    num.textContent = "しばらくお待ちください...";
+    fetch("https://script.google.com/macros/s/AKfycby94LIjKq6ynCVSvQhrx5xaNEJ6n6WOJ-N0pxQH7Lv_Gve4OZQGLF_dpN2MQz4Tf3BG/exec")
+    .then(response => response.text())
+    .then(text => {
+      //console.log("返ってきた num は：", text);
+      number.textContent = "受付番号："+text+" 番";
+      suc.textContent = "受付完了しました";
+      wait.textContent = "次の入場は，画面が切り替わるまでお待ちください"
+      setTimeout(() => {
+      location.reload();
+    }, 6000);
+    })
+    .catch(err => {
+      console.error("GAS 呼び出しに失敗しました", err);
+    });
+    }
+
+</script>
+</html>
